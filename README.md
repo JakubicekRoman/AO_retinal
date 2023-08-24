@@ -19,7 +19,7 @@ General information about this tool:
 * python version 3.10
 * pytorch version 2.0.1
 * cuda-toolkit 11.8
-* trained model (download ...)
+* trained model (download [**here**](https://drive.google.com/file/d/1DVW1OBlFfjvxzSQL202NrVQKjQUC_fOs/view?usp=drive_link))
 
 ## Virtual eviroment
 in the terminal:
@@ -44,8 +44,7 @@ activate venv
 
 ## Prerequisities and Running the Program
 
-Download the model and save to current folders
-link: 
+Download the model [**here**](https://drive.google.com/file/d/1DVW1OBlFfjvxzSQL202NrVQKjQUC_fOs/view?usp=drive_link) and save to current folders
 
 Set path to folder with donwloaded models - call in terminal:
 ```
@@ -54,11 +53,12 @@ export nnUNet_results="./nnUNet_trained_models"
 
 Calling program:
 ```
-AO_segm --input folder_with_images --output folder_for_saving
+python3 AO_segm.py -h
+python3 AO_segm.py --input folder_with_images --output folder_for_saving
 ```
 
 Example of calling:
 ```
-AO_segm -i /mnt/Data/jakubicek/Ophtalmo/AO_retinal/Data/test -o /mnt/Data/jakubicek/Ophtalmo/AO_retinal/Data/test_results
+python3 AO_segm.py -i /mnt/DATA/jakubicek/AO_segmentation/Data/test -o /mnt/DATA/jakubicek/AO_segmentation/Data/test_results
 ```
 
