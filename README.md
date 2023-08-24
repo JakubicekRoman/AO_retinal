@@ -16,48 +16,49 @@ General information about this tool:
 ## Requirements
 * PC with Linux and GPU
 * virtual enviroment
-* python version 3.11 (or 3.10)
+* python version 3.10
 * pytorch version 2.0.1
 * cuda-toolkit 11.8
-* trained model (donwload ...)
+* trained model (download ...)
 
 ## Virtual eviroment
 in the terminal:
 * clone git repositary from github
 * set current folder in terminal of AO_retinal
-* check Python version (major version ```python3 --version``` and all installed versions ```ls -ls /usr/bin/python*```)
+* for PIP instalation, check Python version (major version ```python3 --version``` and all installed versions ```ls -ls /usr/bin/python*```)
 
-Create virtual enviroment
-```python3.11 -m venv "env/AO_retinal"```
+Create virtual enviroment via PIP
+```python3.10 -m venv "./env/AO_segm"```
 
 activate venv
-```source "./env/AO_retinal/bin/activate"```
+```source "./env/AO_segm/bin/activate"```
 
 Install packages:
-```
-pip install -r requirements.txt
-```
+```pip install -r requirements.txt```
 
-The main packages are:
-```
-numpy 
-SimpleITK 
-torch
-nnunet
-```
+or Create virtual enviroment via CONDA
+```conda env create --file environment.yml```
+activate venv
+```conda activate AO_segm```
+
 
 ## Prerequisities and Running the Program
 
-Set path to folder with donwloaded models:
+Download the model and save to current folders
+link: 
+
+Set path to folder with donwloaded models - call in terminal:
 ```
 export nnUNet_results="./nnUNet_trained_models"
 ```
 
+Calling program:
 ```
-main.AO_segm('/mnt/Data/jakubicek/Ophtalmo/AO_retinal/Data/test', '/mnt/Data/jakubicek/Ophtalmo/AO_retinal/Data/test_res')
+AO_segm --input folder_with_images --output folder_for_saving
+```
 
-nnUNetv2_predict -i /mnt/Data/jakubicek/Ophtalmo/AO_retinal/Data/test_results/temp/input/ -o /mnt/Data/jakubicek/Ophtalmo/AO_retinal/Data/test_results/temp/output/ -d 001 -c 2d -f all
-
-
+Example of calling:
+```
+AO_segm -i /mnt/Data/jakubicek/Ophtalmo/AO_retinal/Data/test -o /mnt/Data/jakubicek/Ophtalmo/AO_retinal/Data/test_results
 ```
 

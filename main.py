@@ -72,13 +72,13 @@ def AO_segm(path_data, path_save):
         
     print('Calling segmentation network ... ')
     
-    cmd = "nnUNetv2_predict " + "-i " + path_tempIn + " -o " + path_tempOut  + " -d 001 -c 2d -f all"
+    cmd = "nnUNetv2_predict " + "-i " + path_tempIn + " -o " + path_tempOut  + " -d 002 -c 2d -f all"
 
     os.system(cmd)
     
     print('Segmentation is done.')
     
-    print('Results resaving is done.')
+    print('Results resaving...')
     
     for idx, file in enumerate(res_list):
         # print(idx)
@@ -96,11 +96,12 @@ def AO_segm(path_data, path_save):
         im.save(dname + os.sep + fname)
     
     shutil.rmtree(path_save+'//temp//')
+    print('Program finished.')
 
-if __name__ == "__main__":
-    
-    path_data = '/mnt/DATA/jakubicek/AO_segmentation/Data/test'
-    path_save = '/mnt/DATA/jakubicek/AO_segmentation/Data/test_results'
-    AO_segm(path_data, path_save)
+# if __name__ == "__main__":
+#     
+#     path_data = '/mnt/DATA/jakubicek/AO_segmentation/Data/test'
+#     path_save = '/mnt/DATA/jakubicek/AO_segmentation/Data/test_results'
+#     AO_segm(path_data, path_save)
 
     
