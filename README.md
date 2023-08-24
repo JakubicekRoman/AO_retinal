@@ -53,3 +53,11 @@ Set path to folder with donwloaded models:
 export nnUNet_results="./nnUNet_trained_models"
 ```
 
+```
+main.AO_segm('/mnt/Data/jakubicek/Ophtalmo/AO_retinal/Data/test', '/mnt/Data/jakubicek/Ophtalmo/AO_retinal/Data/test_res')
+
+nnUNetv2_predict -i /mnt/Data/jakubicek/Ophtalmo/AO_retinal/Data/test_results/temp/input/ -o /mnt/Data/jakubicek/Ophtalmo/AO_retinal/Data/test_results/temp/output/ -d 001 -c 2d -f all
+
+
+```
+

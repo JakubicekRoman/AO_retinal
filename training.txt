@@ -1,0 +1,29 @@
+----eviroment
+
+conda create --name AO_segm2 python=3.10
+conda activate AO_segm2
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
+pip install nnunetv2
+	git clone https://github.com/MIC-DKFZ/nnUNet.git
+	cd nnUNet
+	pip install -e .
+conda install -c conda-forge matplotlib - asi neni treba, obsazen uz v
+
+conda install -c anaconda pip
+conda install -c anaconda spyder
+
+
+--- nnUNET training
+
+export nnUNet_raw="/mnt/Data/jakubicek/Ophtalmo/AO_retinal/nnUNet_raw" 
+export nnUNet_preprocessed="/mnt/Data/jakubicek/Ophtalmo/AO_retinal/nnUNet_preprocessed" 
+export nnUNet_results="/mnt/Data/jakubicek/Ophtalmo/AO_retinal/nnUNet_results/" 
+
+nnUNetv2_plan_and_preprocess -d 002 --verify_dataset_integrity
+nnUNetv2_train 002 2d all
+
+
+--- prediction
+
+nnUNetv2_predict -i /mnt/Data/jakubicek/Ophtalmo/AO_retinal/Data/test_results/temp/input/ -o /mnt/Data/jakubicek/Ophtalmo/AO_retinal/Data/test_results/temp/output/ -d 002 -c 2d -f all
+
