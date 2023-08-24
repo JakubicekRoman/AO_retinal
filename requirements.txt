@@ -1,51 +1,55 @@
 acvl-utils==0.2
 batchgenerators==0.25
+blessed==1.20.0
 brotlipy==0.7.0
-certifi==2020.6.20
-cffi @ file:///work/ci_py311/cffi_1676822533496/work
+certifi @ file:///croot/certifi_1671487769961/work/certifi
+cffi @ file:///croot/cffi_1670423208954/work
 charset-normalizer @ file:///tmp/build/80754af9/charset-normalizer_1630003229654/work
 connected-components-3d==3.12.2
-contourpy @ file:///work/ci_py311/contourpy_1676827066340/work
+contourpy==1.1.0
 cryptography @ file:///croot/cryptography_1689373676338/work
-cycler @ file:///home/conda/feedstock_root/build_artifacts/cycler_1635519461629/work
+cycler==0.11.0
+deepmedic @ file:///home/jakubicek/Glioms_Brain/codes/MRI_Brain/Glioms_MRI_Brain/deepmedic
 dicom2nifti==2.4.8
+distlib==0.3.6
 dynamic-network-architectures==0.2
-filelock @ file:///work/ci_py311/filelock_1676823024085/work
-fonttools==4.25.0
+filelock==3.12.0
+fonttools==4.42.1
 future==0.18.3
-gmpy2 @ file:///work/ci_py311/gmpy2_1676839849213/work
+gmpy2 @ file:///tmp/build/80754af9/gmpy2_1645455533097/work
+gpustat==1.1
 graphviz==0.20.1
-idna @ file:///work/ci_py311/idna_1676822698822/work
+idna @ file:///croot/idna_1666125576474/work
 imagecodecs==2023.8.12
 imageio==2.31.1
-Jinja2 @ file:///work/ci_py311/jinja2_1676823587943/work
+Jinja2 @ file:///croot/jinja2_1666908132255/work
 joblib==1.3.2
-kiwisolver @ file:///work/ci_py311/kiwisolver_1676827230232/work
+kiwisolver==1.4.5
 lazy_loader==0.3
 linecache2==1.0.0
-MarkupSafe @ file:///work/ci_py311/markupsafe_1676823507015/work
-matplotlib @ file:///croot/matplotlib-suite_1679593461707/work
+MarkupSafe @ file:///opt/conda/conda-bld/markupsafe_1654597864307/work
+matplotlib==3.7.2
 MedPy==0.4.0
 mkl-fft==1.3.6
 mkl-random @ file:///work/mkl/mkl_random_1682950433854/work
 mkl-service==2.4.0
 mpmath @ file:///croot/mpmath_1690848262763/work
-munkres==1.1.4
 networkx @ file:///croot/networkx_1690561992265/work
 nibabel==5.1.0
 nnunetv2==2.1
-numpy @ file:///croot/numpy_and_numpy_base_1691091611330/work
-packaging @ file:///home/conda/feedstock_root/build_artifacts/packaging_1681337016113/work
-pandas==2.0.3
+numpy==1.24.2
+nvidia-ml-py==11.525.112
+packaging==23.1
+pandas==2.0.0
 Pillow==9.4.0
-ply==3.11
+platformdirs==3.2.0
+psutil==5.9.5
 pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
 pydicom==2.4.3
 pyOpenSSL @ file:///croot/pyopenssl_1690223430423/work
-pyparsing @ file:///home/conda/feedstock_root/build_artifacts/pyparsing_1690737849915/work
-PyQt5-sip==12.11.0
-PySocks @ file:///work/ci_py311/pysocks_1676822712504/work
-python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1626286286081/work
+pyparsing==3.0.9
+PySocks @ file:///home/builder/ci_310/pysocks_1640793678128/work
+python-dateutil==2.8.2
 python-gdcm==3.0.22
 pytz==2023.3
 PyWavelets==1.4.1
@@ -53,19 +57,16 @@ PyYAML==6.0.1
 requests @ file:///croot/requests_1690400202158/work
 scikit-image==0.21.0
 scikit-learn==1.3.0
-scipy==1.11.2
+scipy==1.10.1
 seaborn==0.12.2
 SimpleITK==2.2.1
-sip @ file:///work/ci_py311/sip_1676825117084/work
-six @ file:///home/conda/feedstock_root/build_artifacts/six_1620240208055/work
-sympy @ file:///work/ci_py311_2/sympy_1679339311852/work
+six==1.16.0
+sympy @ file:///croot/sympy_1668202399572/work
 threadpoolctl==3.2.0
 tifffile==2023.8.12
-toml @ file:///home/conda/feedstock_root/build_artifacts/toml_1604308577558/work
 torch==2.0.1
 torchaudio==2.0.2
 torchvision==0.15.2
-tornado @ file:///croot/tornado_1690848263220/work
 tqdm==4.66.1
 traceback2==1.4.0
 triton==2.0.0
@@ -73,4 +74,6 @@ typing_extensions @ file:///croot/typing_extensions_1690297465030/work
 tzdata==2023.3
 unittest2==1.1.0
 urllib3 @ file:///croot/urllib3_1686163155763/work
+virtualenv==20.22.0
+wcwidth==0.2.6
 yacs==0.1.8

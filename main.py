@@ -10,8 +10,10 @@ import os
 import numpy as np
 import glob
 import argparse
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
+# import matplotlib.pyplot as plt
+# import matplotlib.image as mpimg
+from PIL import Image
+import shutil
 
 
 # os.environ['OMP_NUM_THREADS']="4"
@@ -26,10 +28,6 @@ args = parser.parse_args()
 path_data = args.input
 path_save = args.output
 # model = args.model
-
-def rgb2gray(rgb):
-    return np.dot(rgb[...,:3], [0.2989, 0.5870, 0.1140])
-
 
 def AO_segm(path_data, path_save):
     
@@ -56,18 +54,21 @@ def AO_segm(path_data, path_save):
     if not os.path.exists(path_tempOut):
         os.makedirs(path_tempOut)
     
+    res_list = []
     for idx, file in enumerate(png_list):
         # print(idx)
         # print(file)
         
-        print('Resaving: ' +str(idx)+ ' from '+str(len(png_list)))
+        # print('Resaving: ' +str(idx)+ ' from '+str(len(png_list)))
         
-        im = plt.imread(file)
-        if len(im.shape)==3:
-            im = rgb2gray(im)
-            
+        # im = Image.open(file).convert('L')
+        im = Image.open(file)
+        # numpy_array = np.array(im)
+   
         fname = path_tempIn + 'Img_' '{:03d}'.format(idx) + '_0000.png'    
-        mpimg.imsave(fname, im, cmap='gray')
+        im.save(fname)
+        
+        res_list.append(fname)
         
     print('Calling segmentation network ... ')
     
@@ -75,12 +76,31 @@ def AO_segm(path_data, path_save):
 
     os.system(cmd)
     
+    print('Segmentation is done.')
     
+    print('Results resaving is done.')
+    
+    for idx, file in enumerate(res_list):
+        # print(idx)
+        # print(file)
+        
+        # im = Image.open(file).convert('L')
+        im = Image.open(file.replace('/input/','/output/').replace('_0000',''))
+        im = np.array(im)*255
+        im = Image.fromarray(im)
+   
+        dname = os.path.dirname(png_list[idx]).replace(path_data,path_save)
+        if not os.path.exists(dname):
+            os.makedirs(dname)
+        fname = os.sep + os.path.basename(png_list[idx])
+        im.save(dname + os.sep + fname)
+    
+    shutil.rmtree(path_save+'//temp//')
 
 if __name__ == "__main__":
     
-    path_data = '/mnt/Data/jakubicek/Ophtalmo/AO_retinal/Data/test'
-    path_save = '/mnt/Data/jakubicek/Ophtalmo/AO_retinal/Data/test_results'
+    path_data = '/mnt/DATA/jakubicek/AO_segmentation/Data/test'
+    path_save = '/mnt/DATA/jakubicek/AO_segmentation/Data/test_results'
     AO_segm(path_data, path_save)
 
     

@@ -10,8 +10,10 @@ pip install nnunetv2
 conda install -c conda-forge matplotlib - asi neni treba, obsazen uz v
 
 conda install -c anaconda pip
-conda install -c anaconda spyder
+pip freeze > requirements.txt
+conda env export > enviroment.yml
 
+conda install -c anaconda spyder
 
 --- nnUNET training
 
