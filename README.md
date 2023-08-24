@@ -46,7 +46,7 @@ activate venv
 
 Download the model [**here**](https://drive.google.com/file/d/1DVW1OBlFfjvxzSQL202NrVQKjQUC_fOs/view?usp=drive_link) and save to current folders
 
-Set path to folder with donwloaded models - call in terminal:
+Set path to folder with donwloaded and unziped model - call in terminal:
 ```
 export nnUNet_results="./nnUNet_trained_models"
 ```
