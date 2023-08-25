@@ -61,7 +61,7 @@ Set path to folder with donwloaded and unziped model -> call in terminal:
 export nnUNet_results="./nnUNet_trained_models"
 ```
 
-Calling program:
+Calling og the program:
 ```
 python3 AO_segm.py -h
 python3 AO_segm.py --input folder_with_images --output folder_for_saving
@@ -72,5 +72,5 @@ Example of calling:
 python3 AO_segm.py -i /mnt/DATA/jakubicek/AO_segmentation/Data/test -o /mnt/DATA/jakubicek/AO_segmentation/Data/test_results
 ```
 
-Exampla data can be donwloded here [**here**](https://drive.google.com/file/d/1xIZQ_qJBdn2TUySIkUUThY2rQvYjdDUV/view?usp=drive_link)
+Exampla data can be donwloaded here [**here**](https://drive.google.com/file/d/1xIZQ_qJBdn2TUySIkUUThY2rQvYjdDUV/view?usp=drive_link)
 
