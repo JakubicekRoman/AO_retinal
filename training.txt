@@ -8,19 +8,22 @@ pip install nnunetv2
 	cd nnUNet
 	pip install -e .
 conda install -c conda-forge matplotlib - asi neni treba, obsazen uz v
-
 conda install -c anaconda pip
 pip freeze > requirements.txt
 python3 -m pip install -r requirements.txt
 conda env export > enviroment.yml
-
 conda install -c anaconda spyder
+
+python3 -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+python3 -m pip install nnunetv2
+
+
 
 --- nnUNET training
 
 export nnUNet_raw="/mnt/Data/jakubicek/Ophtalmo/AO_retinal/nnUNet_raw" 
 export nnUNet_preprocessed="/mnt/Data/jakubicek/Ophtalmo/AO_retinal/nnUNet_preprocessed" 
-export nnUNet_results="/mnt/Data/jakubicek/Ophtalmo/AO_retinal/nnUNet_results/" 
+export nnUNet_results="/media/jakubicek/DATA/Jakubicek/AO_retinal/nnUNet_trained_models/" 
 
 export nnUNet_raw="/mnt/Data/jakubicek/Ophtalmo/AO_segmentation/nnUNet_raw" 
 export nnUNet_preprocessed="/mnt/Data/jakubicek/Ophtalmo/AO_segmentation/nnUNet_preprocessed" 
