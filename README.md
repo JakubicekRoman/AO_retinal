@@ -29,18 +29,26 @@ in the terminal:
 * for PIP instalation, check Python version (major version ```python3 --version``` and all installed versions ```ls -ls /usr/bin/python*```)
 
 Install python, pip and venv (if not already)
-```sudo apt install python3.10
+```
+sudo apt install python3.10
 sudo apt install python3-pip
-sudo apt install python3.10-venv```
+sudo apt install python3.10-venv
+```
 
 Create virtual enviroment
-```python3.10 -m venv "./env/AO_segm"```
+```
+python3.10 -m venv "./env/AO_segm"
+```
 
 activate venv
-```source "./env/AO_segm/bin/activate"```
+```
+source "./env/AO_segm/bin/activate"
+```
 
 Install packages:
-```python3 -m pip install -r requirements.txt```
+```
+python3 -m pip install -r requirements.txt
+```
 
 
 
