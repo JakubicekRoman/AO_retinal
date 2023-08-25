@@ -27,6 +27,11 @@ path_data = args.input
 path_save = args.output
 # model = args.model
 
+if path_data[-1]==os.sep:
+    path_data = path_data[0:-1]
+if path_save[-1]==os.sep:
+    path_save = path_save[0:-1]
+    
 # def AO_segm(path_data, path_save):
      
 if not os.path.exists(path_save):
@@ -89,9 +94,9 @@ else:
         dname = os.path.dirname(png_list[idx]).replace(path_data,path_save)
         if not os.path.exists(dname):
             os.makedirs(dname)
-        fname = os.sep + os.path.basename(png_list[idx])
+        fname = os.path.basename(png_list[idx])
         im.save(dname + os.sep + fname)
-    
+    	
     shutil.rmtree(path_save+'//temp//')
     print('Program finished.')
     

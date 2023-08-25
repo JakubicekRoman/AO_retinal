@@ -16,7 +16,7 @@ conda install -c anaconda spyder
 
 python3 -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 python3 -m pip install nnunetv2
-
+python3 -m pip freeze -l > requirements.txt
 
 
 --- nnUNET training
