@@ -27,26 +27,22 @@ in the terminal:
 * set current folder in terminal of AO_retinal
 * for PIP instalation, check Python version (major version ```python3 --version``` and all installed versions ```ls -ls /usr/bin/python*```)
 
-Create virtual enviroment via PIP
+Create virtual enviroment
 ```python3.10 -m venv "./env/AO_segm"```
 
 activate venv
 ```source "./env/AO_segm/bin/activate"```
 
 Install packages:
-```pip install -r requirements.txt```
+```python3 -m pip install -r requirements.txt```
 
-or Create virtual enviroment via CONDA
-```conda env create --file environment.yml```
-activate venv
-```conda activate AO_segm```
 
 
 ## Prerequisities and Running the Program
 
 Download the model [**here**](https://drive.google.com/file/d/1DVW1OBlFfjvxzSQL202NrVQKjQUC_fOs/view?usp=drive_link) and save to current folders
 
-Set path to folder with donwloaded and unziped model - call in terminal:
+Set path to folder with donwloaded and unziped model -> call in terminal:
 ```
 export nnUNet_results="./nnUNet_trained_models"
 ```

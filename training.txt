@@ -11,6 +11,7 @@ conda install -c conda-forge matplotlib - asi neni treba, obsazen uz v
 
 conda install -c anaconda pip
 pip freeze > requirements.txt
+python3 -m pip install -r requirements.txt
 conda env export > enviroment.yml
 
 conda install -c anaconda spyder
@@ -20,6 +21,10 @@ conda install -c anaconda spyder
 export nnUNet_raw="/mnt/Data/jakubicek/Ophtalmo/AO_retinal/nnUNet_raw" 
 export nnUNet_preprocessed="/mnt/Data/jakubicek/Ophtalmo/AO_retinal/nnUNet_preprocessed" 
 export nnUNet_results="/mnt/Data/jakubicek/Ophtalmo/AO_retinal/nnUNet_results/" 
+
+export nnUNet_raw="/mnt/Data/jakubicek/Ophtalmo/AO_segmentation/nnUNet_raw" 
+export nnUNet_preprocessed="/mnt/Data/jakubicek/Ophtalmo/AO_segmentation/nnUNet_preprocessed" 
+export nnUNet_results="/mnt/Data/jakubicek/Ophtalmo/AO_segmentation/nnUNet_trained_models/" 
 
 nnUNetv2_plan_and_preprocess -d 002 --verify_dataset_integrity
 nnUNetv2_train 002 2d all
