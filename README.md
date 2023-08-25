@@ -17,6 +17,7 @@ General information about this tool:
 * PC with Linux and GPU
 * virtual enviroment
 * python version 3.10
+* installed pip and venv
 * pytorch version 2.0.1
 * cuda-toolkit 11.8
 * trained model (download [**here**](https://drive.google.com/file/d/1DVW1OBlFfjvxzSQL202NrVQKjQUC_fOs/view?usp=drive_link))
@@ -26,6 +27,11 @@ in the terminal:
 * clone git repositary from github
 * set current folder in terminal of AO_retinal
 * for PIP instalation, check Python version (major version ```python3 --version``` and all installed versions ```ls -ls /usr/bin/python*```)
+
+Install python, pip and venv (if not already)
+```sudo apt install python3.10
+sudo apt install python3-pip
+sudo apt install python3.10-venv```
 
 Create virtual enviroment
 ```python3.10 -m venv "./env/AO_segm"```
