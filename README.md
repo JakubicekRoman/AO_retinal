@@ -1,9 +1,9 @@
 # AO_retinal images analysis
-Project focused on retinal images from Adaptive Optic (AO) including vessels segmetnation and analysis of their wall thickness.
+Project focused on retinal images from Adaptive Optic (AO) including vessels segmentation and analysis of their wall thickness.
 
 ## Description
 For now, only vessel segmentation is included.
-A tool for the vessels segmention in AO images based on segmentation neural network nnUNet second version.
+A tool for the vessel segmentation in AO images based on segmentation neural network nnUNet second version.
 
 General information about this tool:
 * It runs only on Linux
@@ -15,18 +15,18 @@ General information about this tool:
 
 ## Requirements
 * PC with Linux and GPU
-* virtual enviroment
+* virtual environment
 * python version 3.10
 * installed pip and venv
 * pytorch version 2.0.1
 * cuda-toolkit 11.8
 * trained model (download [**here**](https://drive.google.com/file/d/1DVW1OBlFfjvxzSQL202NrVQKjQUC_fOs/view?usp=drive_link))
 
-## Virtual eviroment
+## Virtual environment
 in the terminal:
-* clone git repositary from github
+* clone git repository from github
 * set current folder of AO_retinal in the terminal
-* for PIP instalation, check Python version (major version ```python3 --version``` and all installed versions ```ls -ls /usr/bin/python*```)
+* for PIP installation, check Python version (major version ```python3 --version``` and all installed versions ```ls -ls /usr/bin/python*```)
 
 Install python, pip and venv (if not already)
 ```
@@ -35,7 +35,7 @@ sudo apt install python3-pip
 sudo apt install python3.10-venv
 ```
 
-Create virtual enviroment
+Create virtual environment
 ```
 python3.10 -m venv "./env/AO_segm"
 ```
@@ -52,11 +52,11 @@ python3 -m pip install -r requirements.txt
 
 
 
-## Prerequisities and Running the Program
+## Prerequisites and Running the Program
 
 Download the model [**here**](https://drive.google.com/file/d/1DVW1OBlFfjvxzSQL202NrVQKjQUC_fOs/view?usp=drive_link) and save to current folders
 
-Set folder path to downloaded and unziped model -> call in terminal:
+Set folder path to downloaded and unzipped model -> call in terminal:
 ```
 export nnUNet_results="./nnUNet_trained_models"
 ```
@@ -72,5 +72,5 @@ Example of calling:
 python3 AO_segm.py -i /mnt/DATA/jakubicek/AO_segmentation/Data/test -o /mnt/DATA/jakubicek/AO_segmentation/Data/test_results
 ```
 
-Example of AO images can be donwloaded here [**here**](https://drive.google.com/file/d/1xIZQ_qJBdn2TUySIkUUThY2rQvYjdDUV/view?usp=drive_link)
+Example of AO images can be downloaded here [**here**](https://drive.google.com/file/d/1xIZQ_qJBdn2TUySIkUUThY2rQvYjdDUV/view?usp=drive_link)
 
