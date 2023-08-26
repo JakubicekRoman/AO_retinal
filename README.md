@@ -25,7 +25,7 @@ General information about this tool:
 ## Virtual eviroment
 in the terminal:
 * clone git repositary from github
-* set current folder in terminal of AO_retinal
+* set current folder of AO_retinal in the terminal
 * for PIP instalation, check Python version (major version ```python3 --version``` and all installed versions ```ls -ls /usr/bin/python*```)
 
 Install python, pip and venv (if not already)
@@ -40,7 +40,7 @@ Create virtual enviroment
 python3.10 -m venv "./env/AO_segm"
 ```
 
-activate venv
+Activate venv
 ```
 source "./env/AO_segm/bin/activate"
 ```
@@ -56,12 +56,12 @@ python3 -m pip install -r requirements.txt
 
 Download the model [**here**](https://drive.google.com/file/d/1DVW1OBlFfjvxzSQL202NrVQKjQUC_fOs/view?usp=drive_link) and save to current folders
 
-Set path to folder with donwloaded and unziped model -> call in terminal:
+Set folder path to downloaded and unziped model -> call in terminal:
 ```
 export nnUNet_results="./nnUNet_trained_models"
 ```
 
-Calling og the program:
+Calling of the program:
 ```
 python3 AO_segm.py -h
 python3 AO_segm.py --input folder_with_images --output folder_for_saving
@@ -72,5 +72,5 @@ Example of calling:
 python3 AO_segm.py -i /mnt/DATA/jakubicek/AO_segmentation/Data/test -o /mnt/DATA/jakubicek/AO_segmentation/Data/test_results
 ```
 
-Exampla data can be donwloaded here [**here**](https://drive.google.com/file/d/1xIZQ_qJBdn2TUySIkUUThY2rQvYjdDUV/view?usp=drive_link)
+Example of AO images can be donwloaded here [**here**](https://drive.google.com/file/d/1xIZQ_qJBdn2TUySIkUUThY2rQvYjdDUV/view?usp=drive_link)
 
