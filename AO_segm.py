@@ -14,6 +14,7 @@ import argparse
 # import matplotlib.image as mpimg
 from PIL import Image
 import shutil
+import imageio.v3 as iio
 
 
 parser = argparse.ArgumentParser()
@@ -41,6 +42,7 @@ else:
     print('Warning: Output folder already exists!')
 
 png_list = glob.glob(path_data+'//**//*.png', recursive=True)
+png_list.sort()
 
 if not png_list:
     print('No images has been found. Program has been cancelled.')
@@ -64,11 +66,13 @@ else:
         # print('Resaving: ' +str(idx)+ ' from '+str(len(png_list)))
         
         # im = Image.open(file).convert('L')
-        im = Image.open(file)
+        # im = Image.open(file)
+        im = iio.imread(file)
         # numpy_array = np.array(im)
        
         fname = path_tempIn + 'Img_' '{:03d}'.format(idx) + '_0000.png'    
-        im.save(fname)
+     #    im.save(fname)
+        iio.imwrite(fname, im)
         
         res_list.append(fname)
         
@@ -87,15 +91,20 @@ else:
         # print(file)
         
         # im = Image.open(file).convert('L')
-        im = Image.open(file.replace('/input/','/output/').replace('_0000',''))
+       #  im = Image.open(file.replace('/input/','/output/').replace('_0000',''))
+       #  im = np.array(im)*255
+       #  im = Image.fromarray(im)
+       
+        im = iio.imread(file.replace('/input/','/output/').replace('_0000',''))
         im = np.array(im)*255
-        im = Image.fromarray(im)
        
         dname = os.path.dirname(png_list[idx]).replace(path_data,path_save)
         if not os.path.exists(dname):
             os.makedirs(dname)
         fname = os.path.basename(png_list[idx])
-        im.save(dname + os.sep + fname)
+        
+      #   im.save(dname + os.sep + fname)
+        iio.imwrite(dname + os.sep + fname, im)
     	
     shutil.rmtree(path_save+'//temp//')
     print('Program finished.')
