@@ -47,6 +47,7 @@ source "./env/AO_segm/bin/activate"
 
 Install packages:
 ```
+python3 -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 python3 -m pip install -r requirements.txt
 ```
 
