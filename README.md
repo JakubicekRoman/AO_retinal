@@ -25,7 +25,13 @@ General information about this tool:
 ## Virtual environment
 in the terminal:
 * clone git repository from github
+```
+git clone https://github.com/JakubicekRoman/AO_retinal.git
+```
 * set current folder of AO_retinal in the terminal
+```
+cd AO_segm/
+```
 * for PIP installation, check Python version (major version ```python3 --version``` and all installed versions ```ls -ls /usr/bin/python*```)
 
 Install python, pip and venv (if not already)
