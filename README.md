@@ -82,9 +82,12 @@ python3 AO_segm.py -i /mnt/DATA/jakubicek/AO_segmentation/Data/test -o /mnt/DATA
 Example of AO images can be downloaded [**here**](https://drive.google.com/file/d/1xIZQ_qJBdn2TUySIkUUThY2rQvYjdDUV/view?usp=drive_link)
 
 
-## New calling of the program in the new terminal
-* Set the AO_retinal folder as current folder in the terminal
+## New program call in the new terminal
+* Set the AO_retinal folder as the current folder in the terminal
 * Activate venv - AO_segm
+```
+source "./env/AO_segm/bin/activate"
+```
 * Set folder path to nUNet_trained_models
 ```
 export nnUNet_results="./nnUNet_trained_models"
