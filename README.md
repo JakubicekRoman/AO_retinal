@@ -30,7 +30,7 @@ git clone https://github.com/JakubicekRoman/AO_retinal.git
 ```
 * set current folder of AO_retinal in the terminal
 ```
-cd AO_segm/
+cd AO_retinal/
 ```
 * for PIP installation, check Python version (major version ```python3 --version``` and all installed versions ```ls -ls /usr/bin/python*```)
 
@@ -81,3 +81,15 @@ python3 AO_segm.py -i /mnt/DATA/jakubicek/AO_segmentation/Data/test -o /mnt/DATA
 
 Example of AO images can be downloaded [**here**](https://drive.google.com/file/d/1xIZQ_qJBdn2TUySIkUUThY2rQvYjdDUV/view?usp=drive_link)
 
+
+## New calling of the program in the new terminal
+* Set the AO_retinal folder as current folder in the terminal
+* Activate venv - AO_segm
+* Set folder path to nUNet_trained_models
+```
+export nnUNet_results="./nnUNet_trained_models"
+```
+* call the program
+```
+python3 AO_segm.py -h
+```
