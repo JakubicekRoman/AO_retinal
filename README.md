@@ -45,9 +45,9 @@ Activate venv
 source "./env/AO_segm/bin/activate"
 ```
 
-Install packages:
+Install the packages in this order!!!
 ```
-python3 -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+python3 -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 --no-cache-dir
 python3 -m pip install -r requirements.txt
 ```
 
@@ -73,5 +73,5 @@ Example of calling:
 python3 AO_segm.py -i /mnt/DATA/jakubicek/AO_segmentation/Data/test -o /mnt/DATA/jakubicek/AO_segmentation/Data/test_results
 ```
 
-Example of AO images can be downloaded here [**here**](https://drive.google.com/file/d/1xIZQ_qJBdn2TUySIkUUThY2rQvYjdDUV/view?usp=drive_link)
+Example of AO images can be downloaded [**here**](https://drive.google.com/file/d/1xIZQ_qJBdn2TUySIkUUThY2rQvYjdDUV/view?usp=drive_link)
 
