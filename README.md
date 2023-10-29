@@ -21,7 +21,7 @@ General information about this tool:
 * installed pip and venv
 * pytorch version 2.0.1
 * cuda-toolkit 11.8
-* trained model (download [**here**](https://drive.google.com/file/d/1DVW1OBlFfjvxzSQL202NrVQKjQUC_fOs/view?usp=drive_link))
+* trained model (download [**here**](https://drive.google.com/file/d/1O4tYjqxwVhOZDt4KAdA4Q_IZt4kwU-6H/view?usp=sharing))
 
 ## Virtual environment
 in the terminal:
@@ -62,7 +62,7 @@ python3 -m pip install -r requirements.txt
 
 ## Prerequisites and Running the Program
 
-Download the model [**here**](https://drive.google.com/file/d/1DVW1OBlFfjvxzSQL202NrVQKjQUC_fOs/view?usp=drive_link) and save to current folders
+Download the model [**here**](https://drive.google.com/file/d/1O4tYjqxwVhOZDt4KAdA4Q_IZt4kwU-6H/view?usp=sharing), unzip and save to current folders
 
 Set folder path to downloaded and unzipped model -> call in terminal:
 ```
