@@ -12,6 +12,7 @@ General information about this tool:
 * It works with folder containing png images
 * A "Input path" to a folder containing png files is required as input
 * Output segmentation masks are saved into user's given "Output path" as set of png images
+* There are two segmentation models - 'V1' or 'V2' (newer) without vessel walls.
 
 ## Requirements
 * PC with Linux and GPU
@@ -71,18 +72,18 @@ export nnUNet_results="./nnUNet_trained_models"
 Calling of the program:
 ```
 python3 AO_segm.py -h
-python3 AO_segm.py --input folder_with_images --output folder_for_saving
+python3 AO_segm.py --input folder_with_images --output folder_for_saving --model 'model_version'
 ```
 
 Example of calling:
 ```
-python3 AO_segm.py -i /mnt/DATA/jakubicek/AO_segmentation/Data/test -o /mnt/DATA/jakubicek/AO_segmentation/Data/test_results
+python3 AO_segm.py -i /mnt/DATA/jakubicek/AO_segmentation/Data/test -o /mnt/DATA/jakubicek/AO_segmentation/Data/test_results -m 'V2'
 ```
 
 Example of AO images can be downloaded [**here**](https://drive.google.com/file/d/1xIZQ_qJBdn2TUySIkUUThY2rQvYjdDUV/view?usp=drive_link)
 
 
-## New program call in the new terminal
+## New calling of the program in the new terminal
 * Set the AO_retinal folder as the current folder in the terminal
 * Activate venv - AO_segm
 ```

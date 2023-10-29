@@ -20,18 +20,28 @@ import imageio.v3 as iio
 parser = argparse.ArgumentParser()
 parser.add_argument('-i','--input', action='store',  help="Path to input png images")
 parser.add_argument('-o','--output', action='store',  help="Path to ouput folder")
-# parser.add_argument('-m','--model', action='store',  help="selection prediction model - '2D', '2D_joint' or '3D_joint'")
+parser.add_argument('-m','--model', action='store', default='V2', help="selection prediction model version - older 'V1' or 'V2'-newer model for vessels, no Walls")
 
 args = parser.parse_args()
 
 path_data = args.input
 path_save = args.output
-# model = args.model
+model = args.model
 
 if path_data[-1]==os.sep:
     path_data = path_data[0:-1]
 if path_save[-1]==os.sep:
     path_save = path_save[0:-1]
+    
+if 'V1' in model:
+    model = '002'
+    print('V1 Segmentation model has been chosen.')
+elif 'V2' in model:
+    model = '003'
+    print('V2 Segmentation model has been chosen.')
+else:
+    model = '003'
+    print('Warning: No model has been specified. The V2 segmentation model will be used.')
     
 # def AO_segm(path_data, path_save):
      
@@ -78,7 +88,7 @@ else:
         
     print('Calling segmentation network ... ')
     
-    cmd = "nnUNetv2_predict " + "-i " + path_tempIn + " -o " + path_tempOut  + " -d 002 -c 2d -f all"
+    cmd = "nnUNetv2_predict " + "-i " + path_tempIn + " -o " + path_tempOut  + " -d " + model + " -c 2d -f all"
     
     os.system(cmd)
     
