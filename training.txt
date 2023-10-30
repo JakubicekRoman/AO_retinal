@@ -31,9 +31,9 @@ nnUNetv2_train 003 2d all
 
 --- prediction
 
-nnUNetv2_predict -i /mnt/Data/jakubicek/Ophtalmo/AO_retinal/Data/test_results/temp/input/ -o /mnt/Data/jakubicek/Ophtalmo/AO_retinal/Data/test_results/temp/output/ -d 002 -c 2d -f all
+nnUNetv2_predict -i /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/WLR_test/masks/temp/input/ -o /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/WLR_test/masks/temp/output/ -d 004 -c 2d -f all
 
 ---- prediction all program
-python3 AO_segm.py -i /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/WLR_test/images/ -o /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/WLR_test/masks/ -m 'V2'
+python3 AO_segm.py -i /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/WLR_test/images/ -o /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/WLR_test/masks_V3/ -m 'V3'
 
 

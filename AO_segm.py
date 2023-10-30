@@ -20,7 +20,7 @@ import imageio.v3 as iio
 parser = argparse.ArgumentParser()
 parser.add_argument('-i','--input', action='store',  help="Path to input png images")
 parser.add_argument('-o','--output', action='store',  help="Path to ouput folder")
-parser.add_argument('-m','--model', action='store', default='V2', help="selection prediction model version - older 'V1' or 'V2'-newer model for vessels, no Walls")
+parser.add_argument('-m','--model', action='store', default='V2', help="selection prediction model version - older 'V1' or 'V2'-newer model for vessels, no Walls and 'V3' model for joint segmetantion of vessels and walls")
 
 args = parser.parse_args()
 
@@ -36,13 +36,19 @@ if path_save[-1]==os.sep:
 if 'V1' in model:
     model = '002'
     print('V1 Segmentation model has been chosen.')
+    k = 255 
 elif 'V2' in model:
     model = '003'
     print('V2 Segmentation model has been chosen.')
+    k = 255
+elif 'V3' in model:
+    model = '005'
+    print('V3 Segmentation model has been chosen.')
+    k = 126
 else:
     model = '003'
     print('Warning: No model has been specified. The V2 segmentation model will be used.')
-    
+    k = 255
 # def AO_segm(path_data, path_save):
      
 if not os.path.exists(path_save):
@@ -106,9 +112,9 @@ else:
        #  im = Image.fromarray(im)
        
         im = iio.imread(file.replace('/input/','/output/').replace('_0000',''))
-        im = np.array(im)*255
+        im = np.array(im)*k
        
-        dname = os.path.dirname(png_list[idx]).replace(path_data,path_save)
+        dname = os.path.dirname(png_list[idx]).replace(path_data, path_save)
         if not os.path.exists(dname):
             os.makedirs(dname)
         fname = os.path.basename(png_list[idx])
