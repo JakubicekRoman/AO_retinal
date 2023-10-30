@@ -24,7 +24,7 @@ General information about this tool:
 * installed pip and venv
 * pytorch version 2.0.1
 * cuda-toolkit 11.8
-* trained model (download [**here**](https://drive.google.com/file/d/1O4tYjqxwVhOZDt4KAdA4Q_IZt4kwU-6H/view?usp=sharing))
+* trained model (download [**here**](https://drive.google.com/file/d/1O4tYjqxwVhOZDt4KAdA4Q_IZt4kwU-6H/view?usp=drive_link))
 
 ## Virtual environment
 in the terminal:
@@ -65,7 +65,7 @@ python3 -m pip install -r requirements.txt
 
 ## Prerequisites and Running the Program
 
-Download the model [**here**](https://drive.google.com/file/d/1O4tYjqxwVhOZDt4KAdA4Q_IZt4kwU-6H/view?usp=sharing), unzip and save to current folders
+Download the model [**here**](https://drive.google.com/file/d/1O4tYjqxwVhOZDt4KAdA4Q_IZt4kwU-6H/view?usp=drive_link), unzip and save to current folders
 
 Set folder path to downloaded and unzipped model -> call in terminal:
 ```
@@ -82,8 +82,6 @@ Example of calling:
 ```
 python3 AO_segm.py -i /mnt/DATA/jakubicek/AO_segmentation/Data/test -o /mnt/DATA/jakubicek/AO_segmentation/Data/test_results -m 'V2'
 ```
-
-Example of AO images can be downloaded [**here**](https://drive.google.com/file/d/1xIZQ_qJBdn2TUySIkUUThY2rQvYjdDUV/view?usp=drive_link)
 
 
 ## New calling of the program in the new terminal
