@@ -12,7 +12,7 @@ General information about this tool:
 * It works with folder containing png images
 * A "Input path" to a folder containing png files is required as input
 * Output segmentation masks are saved into user's given "Output path" as set of png images
-* There are three segmentation model
+* There are three segmentation models
   * 'V1' - old version for vessels only
   * 'V2' - newer version for vessels without vessel walls
   * 'V3' - model (beta) for vessels and walls segmentation
