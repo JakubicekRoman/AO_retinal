@@ -41,9 +41,13 @@ elif 'V2' in model:
     model = '003'
     print('V2 Segmentation model has been chosen.')
     k = 255
-elif 'V3' in model:
+elif 'V3.0' in model:
     model = '005'
     print('V3 Segmentation model has been chosen.')
+    k = 126
+elif 'V3.1' in model:
+    model = '006'
+    print('V3.1 Segmentation model has been chosen.')
     k = 126
 else:
     model = '003'

@@ -25,8 +25,9 @@ export nnUNet_raw="/media/jakubicek/DATA/Jakubicek/AO_retinal/Data"
 export nnUNet_preprocessed="/media/jakubicek/DATA/Jakubicek/AO_retinal/nnUNet_trained_preprocessed" 
 export nnUNet_results="/media/jakubicek/DATA/Jakubicek/AO_retinal/nnUNet_trained_models/" 
 
-nnUNetv2_plan_and_preprocess -d 002 --verify_dataset_integrity
-nnUNetv2_train 003 2d all
+nnUNetv2_plan_and_preprocess -d 007 --verify_dataset_integrity
+nnUNetv2_train 007 2d all --c
+nnUNetv2_train 006 2d 0
 
 
 --- prediction
@@ -34,6 +35,17 @@ nnUNetv2_train 003 2d all
 nnUNetv2_predict -i /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/WLR_test/masks/temp/input/ -o /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/WLR_test/masks/temp/output/ -d 004 -c 2d -f all
 
 ---- prediction all program
+python3 AO_segm.py -i /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/Dataset006_AO/imagesTe/ -o /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/Dataset006_AO/imagesTe_pred/ -m 'V3.1'
+
 python3 AO_segm.py -i /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/WLR_test/images/ -o /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/WLR_test/masks_V3/ -m 'V3'
 
+python3 AO_segm.py -i /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/WLR_papyrus_2024/data/ -o /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/WLR_papyrus_2024/mask/ -m 'V3'
+
+--- bash file
+Zkontrolujte, zda máte oprávnění ke spuštění souboru. 
+Pokud ne, použijte příkaz chmod +x k udělení oprávnění k provedení. 
+chmod +x nazev_souboru.sh
+
+Spusťte soubor pomocí příkazu ./ následovaného názvem souboru
+soource ./bash_file.sh
 

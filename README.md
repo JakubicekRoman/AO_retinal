@@ -15,7 +15,8 @@ General information about this tool:
 * There are three segmentation models
   * 'V1' - old version for vessels only
   * 'V2' - newer version for vessels without vessel walls
-  * 'V3' - model (beta) for vessels and walls segmentation
+  * 'V3.1' - model (beta) for vessels and walls segmentation
+  * 'V3.2' - model for vessels and walls segmentation (with cross validation)
 
 ## Requirements
 * PC with Linux and GPU
