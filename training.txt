@@ -39,7 +39,7 @@ python3 AO_segm.py -i /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/Dataset006
 
 python3 AO_segm.py -i /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/WLR_test/images/ -o /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/WLR_test/masks_V3/ -m 'V3'
 
-python3 AO_segm.py -i /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/WLR_papyrus_2024/data/ -o /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/WLR_papyrus_2024/mask/ -m 'V3'
+python3 AO_segm.py -i /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/WLR_papyrus_2024/data/ -o /media/jakubicek/DATA/Jakubicek/AO_retinal/Data/WLR_papyrus_2024/mask/ -m 'V3.1'
 
 --- bash file
 Zkontrolujte, zda máte oprávnění ke spuštění souboru. 
