@@ -13,6 +13,10 @@ Automated vessel segmentation and wall thickness analysis of Adaptive Optics (AO
 - **Python 3.12** (the installer downloads it automatically via `winget` if missing)
 - **CUDA GPU** (optional; works on CPU as well, but slower)
 
+## Trained model
+
+Download the trained nnUNet model [**here**](https://drive.google.com/file/d/1O4tYjqxwVhOZDt4KAdA4Q_IZt4kwU-6H/view?usp=drive_link), unzip it and place the contents into the `nnUNet_trained_models` folder in the project root.
+
 ## Installation
 
 Run the installer by double-clicking or from the command line:
