@@ -1,0 +1,20 @@
+# Additional project dependencies not pulled in by nnUNet (installed with --no-deps).
+# PyTorch and nnUNet are installed by install_environment.bat.
+# openpyxl is needed for Excel output support in the analysis step.
+
+# nnUNet runtime dependencies (not installed because nnUNet uses --no-deps)
+acvl_utils
+dynamic-network-architectures>=0.3.1,<0.4
+tqdm
+nibabel
+dicom2nifti
+graphviz
+imagecodecs
+matplotlib
+seaborn
+yacs
+
+# Project dependencies
+imageio
+openpyxl>=3.1.0
+
