@@ -30,6 +30,10 @@ The script will automatically:
 - create a virtual environment (`.venv`)
 - install PyTorch, nnUNet, and all dependencies from `requirements_pipeline.txt`
 
+## Sample data
+
+Download sample data [**here**](https://drive.google.com/file/d/1Vh6YbeOGG9dOEjrUav0qICemMKqGn-ym/view?usp=drive_link).
+
 ## Data preparation
 
 Create a data folder with an `images` subfolder containing the input PNG images:
