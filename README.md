@@ -32,7 +32,7 @@ The script will automatically:
 
 ## Sample data
 
-Download sample data [**here**](https://drive.google.com/file/d/1Vh6YbeOGG9dOEjrUav0qICemMKqGn-ym/view?usp=drive_link).
+Download sample data [**here**](https://drive.google.com/file/d/1Vh6YbeOGG9dOEjrUav0qICemMKqGn-ym/view?usp=sharing).
 
 ## Data preparation
 
