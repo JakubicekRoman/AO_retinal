@@ -4,3 +4,11 @@
 /nnUNet*/
 *.zip
 /env/
+*.png
+*.jpg
+*.jpeg
+*.xlsx
+*.xls   
+**/*.pyc
+**/__pycache__/
+**/.DS_Store

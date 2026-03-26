@@ -1,0 +1,24 @@
+# Minimal dependencies for vessel_pipeline.bat runtime
+# Install with: pip install -r requirements_pipeline.txt
+# PyTorch is installed by install_environment.bat (GPU if available, otherwise CPU)
+# These versions are compatible with PyTorch 2.5.1 and nnUNetv2 2.4.x
+
+# Core numerical/image stack (compatible with PyTorch 2.5.1)
+numpy>=1.26.0,<3.0
+scipy>=1.13.0
+scikit-image>=0.23.0
+imageio>=2.35.0
+Pillow>=10.0.0
+
+# Analysis outputs
+pandas>=2.1.0
+openpyxl>=3.1.0
+et-xmlfile>=1.1.0
+
+# Utility
+batchgenerators>=0.25
+tqdm>=4.66.0
+
+# Additional nnUNet dependencies
+networkx>=3.0
+pyyaml>=6.0

@@ -1,0 +1,8 @@
+
+.venv\Scripts\activate
+
+set nnUNet_results=C:\Data\Jakubicek\AO_retinal\nnUNet_trained_models
+
+python AO_segm.py -h
+
+python AO_segm.py --input C:\Data\Jakubicek\AO_retinal\Data\Vessels_ALL_to_May_posbirano11082025\test --output C:\Data\Jakubicek\AO_retinal\Data\Vessels_ALL_to_May_posbirano11082025\mask --model 'V3.2'

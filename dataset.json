@@ -1,0 +1,14 @@
+{
+    "channel_names": {
+        "0": "image"
+    },
+    "labels": {
+        "background": 0,
+        "vessel": 1,
+        "wall": 2
+    },
+    "numTraining": 660,
+    "file_ending": ".png",
+    "name": "Dataset007_AO",
+    "description": "new training 2025"
+}

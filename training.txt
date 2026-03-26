@@ -21,9 +21,9 @@ python3 -m pip freeze -l > requirements.txt
 
 --- nnUNET training
 
-export nnUNet_raw="/media/jakubicek/DATA/Jakubicek/AO_retinal/Data" 
-export nnUNet_preprocessed="/media/jakubicek/DATA/Jakubicek/AO_retinal/nnUNet_trained_preprocessed" 
-export nnUNet_results="/media/jakubicek/DATA/Jakubicek/AO_retinal/nnUNet_trained_models/" 
+export nnUNet_raw="C:\Data\Jakubicek\AO_retinal\Data" 
+export nnUNet_preprocessed="C:\Data\Jakubicek\AO_retinal\nnUNet_trained_preprocessed" 
+export nnUNet_results="C:\Data\Jakubicek\AO_retinal\nnUNet_trained_models" 
 
 nnUNetv2_plan_and_preprocess -d 007 --verify_dataset_integrity
 nnUNetv2_train 007 2d all --c
@@ -47,5 +47,8 @@ Pokud ne, použijte příkaz chmod +x k udělení oprávnění k provedení.
 chmod +x nazev_souboru.sh
 
 Spusťte soubor pomocí příkazu ./ následovaného názvem souboru
-soource ./bash_file.sh
+source ./bash_file.sh
+
+Pro widnows
+train_nnunet.bat
 
