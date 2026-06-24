@@ -123,11 +123,10 @@ def AO_segm(path_data, path_save, model='V2'):
             
         print('Calling segmentation network ... ')
 
-        # Try to find nnUNetv2_predict in the virtual environment
-        venv_python = os.path.join(os.path.dirname(os.path.dirname(__file__)), '.venv', 'Scripts', 'python.exe')
-        if os.path.exists(venv_python):
-            # Use python -m to ensure correct environment
-            cmd = [venv_python, '-m', 'nnunetv2.inference.predict_from_raw_data']
+        # Use the currently running interpreter to keep nnUNet aligned
+        # with the active environment (set by vessel_pipeline.bat).
+        if sys.executable and os.path.exists(sys.executable):
+            cmd = [sys.executable, '-m', 'nnunetv2.inference.predict_from_raw_data']
         else:
             cmd = ['nnUNetv2_predict']
         

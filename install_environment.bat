@@ -228,12 +228,17 @@ if errorlevel 1 (
     exit /b 1
 )
 
-echo [10/10] Verifying nnUNet command...
-python -c "import nnunetv2; print('nnUNet version:', nnunetv2.__version__)"
+echo [10/10] Verifying nnUNet installation...
+python -c "import nnunetv2.inference.predict_from_raw_data as p; print('nnUNet import: OK')"
 if errorlevel 1 (
     echo ERROR: nnUNet import verification failed.
     echo Continuing anyway - nnUNet may still work.
     echo.
+) else (
+    python -c "import importlib.metadata as m; print('nnUNet package version:', m.version('nnunetv2'))"
+    if errorlevel 1 (
+        echo WARNING: nnUNet version could not be resolved from package metadata.
+    )
 )
 
 echo.
