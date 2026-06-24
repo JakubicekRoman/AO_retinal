@@ -123,6 +123,22 @@ def AO_segm(path_data, path_save, model='V2'):
             
         print('Calling segmentation network ... ')
 
+        # Validate that the expected model dataset folder exists before calling nnUNet
+        nnunet_results = os.environ.get('nnUNet_results', '')
+        if nnunet_results:
+            dataset_folder = os.path.join(nnunet_results, f'Dataset{model}_*')
+            import glob as _glob
+            matches = _glob.glob(dataset_folder)
+            if not matches:
+                print(f"ERROR: Trained model for dataset '{model}' not found in: {nnunet_results}")
+                print(f"       Expected a folder matching: Dataset{model}_*")
+                print(f"       Please download the AO retinal models from:")
+                print(f"       https://drive.google.com/file/d/1O4tYjqxwVhOZDt4KAdA4Q_IZt4kwU-6H/view?usp=drive_link")
+                print(f"       and extract them into: {nnunet_results}")
+                if os.path.exists(path_save + os.sep + 'temp'):
+                    shutil.rmtree(path_save + os.sep + 'temp')
+                return False
+
         # Use the currently running interpreter to keep nnUNet aligned
         # with the active environment (set by vessel_pipeline.bat).
         if sys.executable and os.path.exists(sys.executable):
