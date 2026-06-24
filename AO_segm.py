@@ -141,8 +141,14 @@ def AO_segm(path_data, path_save, model='V2'):
 
         # Use the currently running interpreter to keep nnUNet aligned
         # with the active environment (set by vessel_pipeline.bat).
+        # Do not call the module with `-m`: some nnUNet builds ship a
+        # hardcoded __main__ demo block for Dataset003_Liver.
         if sys.executable and os.path.exists(sys.executable):
-            cmd = [sys.executable, '-m', 'nnunetv2.inference.predict_from_raw_data']
+            cmd = [
+                sys.executable,
+                '-c',
+                'from nnunetv2.inference.predict_from_raw_data import predict_entry_point; predict_entry_point()'
+            ]
         else:
             cmd = ['nnUNetv2_predict']
         
@@ -157,6 +163,10 @@ def AO_segm(path_data, path_save, model='V2'):
         device = resolve_nnunet_device()
         print(f'Using nnUNet device: {device}')
         cmd.extend(["-device", device])
+
+        print(f'DEBUG nnUNet_results env: {os.environ.get("nnUNet_results", "(not set)")}')
+        print(f'DEBUG sys.executable: {sys.executable}')
+        print(f'DEBUG nnUNet command: {" ".join(cmd)}')
 
         result = subprocess.run(cmd, check=False)
         if result.returncode != 0:
