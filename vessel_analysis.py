@@ -98,6 +98,21 @@ def refine_walls(lumen, walls):
     return refined_mask, skel
 
 
+def _fit_to_shape(arr, target_shape):
+    """
+    Crop or zero-pad a 2D array so it exactly matches target_shape.
+    Needed because ndimage.zoom(0.5) followed by zoom(2.0) does not
+    exactly invert for odd-sized dimensions (rounds to nearest pixel).
+    """
+    target_h, target_w = target_shape
+    out = arr[:target_h, :target_w]
+    pad_h = target_h - out.shape[0]
+    pad_w = target_w - out.shape[1]
+    if pad_h > 0 or pad_w > 0:
+        out = np.pad(out, ((0, max(pad_h, 0)), (0, max(pad_w, 0))), mode='constant', constant_values=0)
+    return out
+
+
 def extract_skeleton(mask):
     """
     Extract and refine vessel skeleton with multi-scale processing.
@@ -168,7 +183,7 @@ def extract_skeleton(mask):
     
     # Upscale back to original size BEFORE labeling (to keep skeleton thin)
     skel = ndimage.zoom(skel.astype(float), 2.0, order=0) > 0.5  # Convert back to binary
-    skel = skel[:mask.shape[0], :mask.shape[1]]
+    skel = _fit_to_shape(skel, mask.shape)
     
     # Re-skeletonize after upscaling to remove thickening artifacts
     skel = medial_axis(skel)

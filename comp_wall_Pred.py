@@ -108,9 +108,10 @@ def main():
         print()
         
         # Default paths for debugging
-        path_images = r'C:\Data\Jakubicek\AO_retinal\Data\Tested_data_12_2025\images'
-        path_masks = r'C:\Data\Jakubicek\AO_retinal\Data\Tested_data_12_2025\masks'
-        path_output = r'C:\Data\Jakubicek\AO_retinal\Data\Tested_data_12_2025\results_analysis'
+        base_dir = Path(__file__).resolve().parent
+        path_images = base_dir / 'Data2' / 'images'
+        path_masks = base_dir / 'Data2' / 'masks'
+        path_output = base_dir / 'Data2' / 'results_analysis_Py'
         verbose = True
         
         print(f"Images:  {path_images}")

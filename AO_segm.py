@@ -19,6 +19,16 @@ import subprocess
 import sys
 
 
+
+def build_foreground_mask(image, black_threshold=0):
+    """Return True for non-background pixels in the original image."""
+    image = np.asarray(image)
+    if image.ndim == 3:
+        return np.any(image > black_threshold, axis=2)
+    return image > black_threshold
+
+
+
 def resolve_nnunet_device():
     """Resolve nnUNet inference device from env, defaulting to GPU when available."""
     device = os.environ.get('NNUNET_DEVICE', 'auto').strip().lower()
@@ -41,20 +51,32 @@ def resolve_nnunet_device():
     return 'cpu'
 
 
+def ensure_nnunet_env():
+    """Set nnU-Net environment variables if missing (e.g. when running/debugging
+    this script directly, without going through vessel_pipeline.bat)."""
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    os.environ.setdefault('nnUNet_raw', os.path.join(base_dir, 'Data'))
+    os.environ.setdefault('nnUNet_preprocessed', os.path.join(base_dir, 'nnUNet_trained_preprocessed'))
+    os.environ.setdefault('nnUNet_results', os.path.join(base_dir, 'nnUNet_trained_models'))
+    os.environ.setdefault('TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD', '1')
+
+
 def AO_segm(path_data, path_save, model='V2'):
     """
     Segmentace AO retinálních snímků pomocí nnUNet modelu.
-    
+
     Args:
         path_data: Cesta k vstupním png obrázkům
         path_save: Cesta k výstupní složce
         model: Verze modelu ('V1', 'V2', 'V3.0', 'V3.1', 'V3.2')
     """
+    ensure_nnunet_env()
+
     if path_data[-1]==os.sep:
         path_data = path_data[0:-1]
     if path_save[-1]==os.sep:
         path_save = path_save[0:-1]
-        
+
     if 'V1' in model:
         model = '002'
         print('V1 Segmentation model has been chosen.')
@@ -195,6 +217,11 @@ def AO_segm(path_data, path_save, model='V2'):
                 continue
             im = iio.imread(out_path)
             im = np.array(im)*k
+
+            # Remove segmentation in black background based on original image.
+            original_img = iio.imread(png_list[idx])
+            foreground = build_foreground_mask(original_img, black_threshold=0)
+            im = np.where(foreground, im, 0).astype(np.uint8)
         
             dname = os.path.dirname(png_list[idx]).replace(path_data, path_save)
             if not os.path.exists(dname):
@@ -214,23 +241,39 @@ def AO_segm(path_data, path_save, model='V2'):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-i','--input', action='store',  help="Path to input png images")
-    parser.add_argument('-o','--output', action='store',  help="Path to ouput folder")
-    parser.add_argument('-m','--model', action='store', default='V2', help="selection prediction model version - older 'V1' or 'V2'-newer model for vessels, no Walls and 'V3' model for joint segmetantion of vessels and walls")
+    if len(sys.argv) == 1:
+        # Debug mode: no arguments provided (e.g. running/debugging directly in VS Code)
+        print("No arguments provided. Running in DEBUG mode with default paths...")
+        print()
 
-    args = parser.parse_args()
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        path_data = os.path.join(base_dir, 'Data2', 'images')
+        path_save = os.path.join(base_dir, 'Data2', 'masks')
+        model = 'V3.2'
 
-    path_data = args.input
-    path_save = args.output
-    model = args.model
-    
-    success = AO_segm(path_data, path_save, model)
-    sys.exit(0 if success else 1)
-    
-    # # Příklad přímého volání:
-    # path_data = 'C:\\Data\\Jakubicek\\AO_retinal\\Data\\Tested_data_12_2025\\images'
-    # path_save = 'C:\\Data\\Jakubicek\\AO_retinal\\Data\\Tested_data_12_2025\\masks'
-    # model = 'V3.2'
-    # AO_segm(path_data, path_save, model)
+        print(f"Images: {path_data}")
+        print(f"Masks:  {path_save}")
+        print(f"Model:  {model}")
+        print()
+
+        if not os.path.exists(path_data):
+            print(f"ERROR: Images directory not found: {path_data}")
+            sys.exit(1)
+
+        success = AO_segm(path_data, path_save, model)
+        sys.exit(0 if success else 1)
+    else:
+        parser = argparse.ArgumentParser()
+        parser.add_argument('-i','--input', action='store',  help="Path to input png images")
+        parser.add_argument('-o','--output', action='store',  help="Path to ouput folder")
+        parser.add_argument('-m','--model', action='store', default='V2', help="selection prediction model version - older 'V1' or 'V2'-newer model for vessels, no Walls and 'V3' model for joint segmetantion of vessels and walls")
+
+        args = parser.parse_args()
+
+        path_data = args.input
+        path_save = args.output
+        model = args.model
+
+        success = AO_segm(path_data, path_save, model)
+        sys.exit(0 if success else 1)
 
