@@ -67,8 +67,10 @@ def refine_walls(lumen, walls):
     # Extract skeleton
     skel = morphology.skeletonize(mask2.astype(uint8 := np.uint8))
     
-    # Label connected components in skeleton
-    labeled_skel, num_features = label(skel)
+    # Label connected components in skeleton (8-connectivity: a thin skeleton
+    # line frequently steps diagonally, so 4-connectivity would fragment one
+    # continuous line into many spurious small components)
+    labeled_skel, num_features = label(skel, structure=np.ones((3, 3), dtype=int))
     props = regionprops(labeled_skel, intensity_image=None)
     
     # Get area of each skeleton component
