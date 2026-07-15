@@ -70,7 +70,9 @@ def refine_walls(lumen, walls):
     # Label connected components in skeleton (8-connectivity: a thin skeleton
     # line frequently steps diagonally, so 4-connectivity would fragment one
     # continuous line into many spurious small components)
+
     labeled_skel, num_features = label(skel, structure=np.ones((3, 3), dtype=int))
+    # labeled_skel, num_features = label(skel)
     props = regionprops(labeled_skel, intensity_image=None)
     
     # Get area of each skeleton component
@@ -82,11 +84,20 @@ def refine_walls(lumen, walls):
         normalized_areas = areas / (areas.max() + 1e-7)
         level = np.mean(areas) * (np.min(normalized_areas) + 0.5 * (np.max(normalized_areas) - np.min(normalized_areas)))
         
-        # Mark small components to remove
+        # Mark small components to remove: a small skeleton branch means the
+        # wall blob it belongs to is spurious noise, so drop the whole
+        # connected wall blob rather than just the 1px-wide skeleton curve
+        # running through it (which would otherwise leave the blob intact
+        # but carved through by a thin gap in its shape of the removed
+        # skeleton).
+        labeled_walls, _ = label(mask2, structure=np.ones((3, 3), dtype=int))
         mask3 = mask2.copy()
         for prop in props:
             if prop.area < level:
-                mask3[labeled_skel == prop.label] = False
+                blob_labels = np.unique(labeled_walls[labeled_skel == prop.label])
+                blob_labels = blob_labels[blob_labels > 0]
+                for blob_label in blob_labels:
+                    mask3[labeled_walls == blob_label] = False
     else:
         mask3 = mask2.copy()
     
@@ -434,10 +445,16 @@ def measure_vessel_walls(img, mask, skeleton, draw_profiles=True):
             profile_y = np.linspace(p1[1], p2[1], 400)
             
             # Get mask values along profile (1=lumen, 2=wall, 0=background)
+            # order=0 (nearest-neighbor): mask is a categorical label map, so
+            # linear interpolation would blend adjacent labels (e.g. wall=2
+            # and background=0 averaging to 1, indistinguishable from lumen)
+            # and produce fractional values at every boundary that match
+            # none of the exact-equality tests below, shrinking the detected
+            # wall/lumen boundaries by ~1-2 px.
             wall = ndimage.map_coordinates(
                 mask.astype(float),
                 [profile_y, profile_x],
-                order=1,
+                order=0,
                 cval=0
             )
             
