@@ -17,15 +17,27 @@ import shutil
 import imageio.v3 as iio
 import subprocess
 import sys
+from scipy.ndimage import binary_fill_holes
 
 
 
-def build_foreground_mask(image, black_threshold=0):
-    """Return True for non-background pixels in the original image."""
+def build_foreground_mask(image, black_threshold=0, fill_holes=True):
+    """Return True for non-background pixels in the original image.
+
+    fill_holes closes zero-intensity speckles that are fully enclosed by
+    tissue (e.g. compression artifacts or dark specks inside vessels) so
+    they aren't mistaken for background and punched out of the segmentation.
+    The true background of a fused/stitched image stays connected to the
+    image border and is unaffected by the fill.
+    """
     image = np.asarray(image)
     if image.ndim == 3:
-        return np.any(image > black_threshold, axis=2)
-    return image > black_threshold
+        mask = np.any(image > black_threshold, axis=2)
+    else:
+        mask = image > black_threshold
+    if fill_holes:
+        mask = binary_fill_holes(mask)
+    return mask
 
 
 
@@ -61,7 +73,7 @@ def ensure_nnunet_env():
     os.environ.setdefault('TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD', '1')
 
 
-def AO_segm(path_data, path_save, model='V2'):
+def AO_segm(path_data, path_save, model='V2', apply_foreground_mask=False):
     """
     Segmentace AO retinálních snímků pomocí nnUNet modelu.
 
@@ -69,6 +81,10 @@ def AO_segm(path_data, path_save, model='V2'):
         path_data: Cesta k vstupním png obrázkům
         path_save: Cesta k výstupní složce
         model: Verze modelu ('V1', 'V2', 'V3.0', 'V3.1', 'V3.2')
+        apply_foreground_mask: Ořízne predikci podle černého pozadí v
+            originálním snímku (holes se před tím zacelí). Určeno pro
+            velké sešité/fused snímky se skutečným černým pozadím mimo
+            fundus; pro běžné jednotlivé snímky nechte False.
     """
     ensure_nnunet_env()
 
@@ -218,10 +234,12 @@ def AO_segm(path_data, path_save, model='V2'):
             im = iio.imread(out_path)
             im = np.array(im)*k
 
-            # Remove segmentation in black background based on original image.
-            original_img = iio.imread(png_list[idx])
-            foreground = build_foreground_mask(original_img, black_threshold=0)
-            im = np.where(foreground, im, 0).astype(np.uint8)
+            if apply_foreground_mask:
+                # Remove segmentation in black background based on original
+                # image (fused/stitched images only - see build_foreground_mask).
+                original_img = iio.imread(png_list[idx])
+                foreground = build_foreground_mask(original_img, black_threshold=0)
+                im = np.where(foreground, im, 0).astype(np.uint8)
         
             dname = os.path.dirname(png_list[idx]).replace(path_data, path_save)
             if not os.path.exists(dname):
@@ -267,6 +285,7 @@ if __name__ == "__main__":
         parser.add_argument('-i','--input', action='store',  help="Path to input png images")
         parser.add_argument('-o','--output', action='store',  help="Path to ouput folder")
         parser.add_argument('-m','--model', action='store', default='V2', help="selection prediction model version - older 'V1' or 'V2'-newer model for vessels, no Walls and 'V3' model for joint segmetantion of vessels and walls")
+        parser.add_argument('--fused', action='store_true', help="Mask prediction to the black background of the original image (holes filled first). Use only for large fused/stitched images with true black background outside the fundus.")
 
         args = parser.parse_args()
 
@@ -274,6 +293,6 @@ if __name__ == "__main__":
         path_save = args.output
         model = args.model
 
-        success = AO_segm(path_data, path_save, model)
+        success = AO_segm(path_data, path_save, model, apply_foreground_mask=args.fused)
         sys.exit(0 if success else 1)
 

@@ -1,5 +1,15 @@
 @echo off
 
+REM ============================================================
+REM Default configuration - edit here to change default behavior
+REM ============================================================
+REM Set to 1 to always apply the fused-image background mask (for large
+REM stitched images with true black background outside the fundus).
+REM Set to 0 (default) for normal single-frame images. Can still be
+REM turned on for a single run without editing this file by passing
+REM --fused on the command line.
+set "USE_FUSED_MASK=0"
+
 set "BASE_DIR=%~dp0"
 if "%BASE_DIR:~-1%"=="\" set "BASE_DIR=%BASE_DIR:~0,-1%"
 
@@ -16,16 +26,25 @@ goto :eof
 if /I not "%~1"=="__run__" (
 	setlocal EnableDelayedExpansion
 	set "RUN_ROOT=%~1"
+	set "FUSED_FLAG="
+	if "%USE_FUSED_MASK%"=="1" set "FUSED_FLAG=--fused"
+	if /I "%~2"=="--fused" set "FUSED_FLAG=--fused"
+	if /I "%~1"=="--fused" (
+		set "FUSED_FLAG=--fused"
+		set "RUN_ROOT="
+	)
 	if "!RUN_ROOT!"=="" (
 		echo.
 		echo Enter data folder path ^(must contain an "images" subfolder^):
-		set /p RUN_ROOT=Data path: 
+		set /p RUN_ROOT=Data path:
 		set "RUN_ROOT=!RUN_ROOT:"=!"
 	)
 	if "!RUN_ROOT!"=="" (
 		echo ERROR: Missing data path.
-		echo Usage: %~nx0 "C:\path\to\data_folder"
+		echo Usage: %~nx0 "C:\path\to\data_folder" [--fused]
 		echo The data folder must contain at least an "images" subfolder.
+		echo Add --fused for large stitched/fused images with true black
+		echo background outside the fundus ^(default: off^).
 		endlocal & exit /b 1
 	)
 	if not exist "!RUN_ROOT!" (
@@ -42,8 +61,13 @@ if /I not "%~1"=="__run__" (
 	set "RUN_TS=!RUN_TS:,=-!"
 	set "LOG_FILE=!LOG_DIR!\vessel_pipeline_!RUN_TS!.log"
 	echo Data path: !RUN_ROOT!
+	if "!FUSED_FLAG!"=="" (
+		echo Fused mode: off
+	) else (
+		echo Fused mode: on ^(background mask applied^)
+	)
 	echo Log file: !LOG_FILE!
-	call "%~f0" __run__ "!RUN_ROOT!" "!LOG_FILE!" 2>&1 | powershell -NoProfile -Command "$OutputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8; $input | ForEach-Object { $_; $_ | Out-File -Append -Encoding utf8 -FilePath '!LOG_FILE!' }"
+	call "%~f0" __run__ "!RUN_ROOT!" "!LOG_FILE!" "!FUSED_FLAG!" 2>&1 | powershell -NoProfile -Command "$OutputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8; $input | ForEach-Object { $_; $_ | Out-File -Append -Encoding utf8 -FilePath '!LOG_FILE!' }"
 	set "PIPE_EXIT=!ERRORLEVEL!"
 	echo.
 	echo Log saved to: !LOG_FILE!
@@ -61,6 +85,7 @@ setlocal
 
 set "RUN_ROOT=%~1"
 set "LOG_FILE=%~2"
+set "FUSED_FLAG=%~3"
 set "VENV_ACTIVATE=%BASE_DIR%\.venv\Scripts\activate.bat"
 
 if "%RUN_ROOT%"=="" (
@@ -156,7 +181,7 @@ if not errorlevel 1 (
 		rd /s /q "%MASKS_DIR%"
 		mkdir "%MASKS_DIR%"
 	)
-	python "%BASE_DIR%\AO_segm.py" -i "%IMAGES_DIR%" -o "%MASKS_DIR%" -m V3.2
+	python "%BASE_DIR%\AO_segm.py" -i "%IMAGES_DIR%" -o "%MASKS_DIR%" -m V3.2 %FUSED_FLAG%
 	if errorlevel 1 (
 		echo [ERROR] Segmentation step failed.
 		exit /b 1

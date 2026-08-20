@@ -60,6 +60,15 @@ The pipeline performs:
 
 If masks already exist and match the input images, segmentation is skipped.
 
+Add `--fused` for large stitched/fused images that have true black background
+outside the fundus (this masks the prediction to that background, with
+internal holes filled first). It is off by default — regular single-frame
+images don't need it:
+
+```
+vessel_pipeline.bat "C:\path\to\my_data" --fused
+```
+
 ## Project structure
 
 | File | Description |
