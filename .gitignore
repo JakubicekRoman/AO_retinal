@@ -1,6 +1,11 @@
 ### Retinal ###
 
 /Data/
+/Data2/
+/Data3/
 /nnUNet*/
 *.zip
 /env/
+/.venv/
+/__pycache__/
+/htmls/
