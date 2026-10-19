@@ -571,17 +571,18 @@ def measure_vessel_walls(img, mask, skeleton, draw_profiles=True):
             else:
                 wall_right_thickness = np.nan
             
-            # Compute lumen diameter as distance between outer walls
-            # MATLAB logic: try outer_left to outer_right first, then fallback
-            # Lumen = sqrt((outer_x_left - outer_x_right)^2 + (outer_y_left - outer_y_right)^2)
-            if not np.isnan(outer_x_left) and not np.isnan(outer_x_right):
-                lumen_diameter = np.sqrt((outer_x_left - outer_x_right)**2 + (outer_y_left - outer_y_right)**2)
-            elif not np.isnan(outer_x_left):
-                # Fallback: 2x distance from outer_left to center
-                lumen_diameter = 2 * np.sqrt((outer_x_left - central_x)**2 + (outer_y_left - central_y)**2)
-            elif not np.isnan(outer_x_right):
-                # Fallback: 2x distance from outer_right to center
-                lumen_diameter = 2 * np.sqrt((outer_x_right - central_x)**2 + (outer_y_right - central_y)**2)
+            # Compute lumen diameter as distance between inner walls (lumen-to-lumen)
+            # Clinically, WLR = wall thickness / lumen diameter, where lumen diameter
+            # is the inner (luminal) diameter, not the outer vessel diameter.
+            # Lumen = sqrt((inner_x_left - inner_x_right)^2 + (inner_y_left - inner_y_right)^2)
+            if not np.isnan(inner_x_left) and not np.isnan(inner_x_right):
+                lumen_diameter = np.sqrt((inner_x_left - inner_x_right)**2 + (inner_y_left - inner_y_right)**2)
+            elif not np.isnan(inner_x_left):
+                # Fallback: 2x distance from inner_left to center
+                lumen_diameter = 2 * np.sqrt((inner_x_left - central_x)**2 + (inner_y_left - central_y)**2)
+            elif not np.isnan(inner_x_right):
+                # Fallback: 2x distance from inner_right to center
+                lumen_diameter = 2 * np.sqrt((inner_x_right - central_x)**2 + (inner_y_right - central_y)**2)
             else:
                 lumen_diameter = np.nan
             
